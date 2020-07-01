@@ -1,5 +1,4 @@
 float r = 80;
-float theta = 0;
 float f = 0;
 float rX = 0;
 float rY = 0;
@@ -15,10 +14,7 @@ void setup() {
 
 void draw() {
   background(0);
-  drawAxes();
-  
   translate(300, 300, 0); 
-  
   noFill();
   strokeWeight(4);
   
@@ -46,9 +42,6 @@ void draw() {
   rotateX(rX);
   rotateY(rY);
   
-  theta = f;
-  print("%i\n",f);
-  
   stroke(0);
   for (int i = 0; i <= 400; i++) {
     float alpha = 255*float(400-i)/400.0;
@@ -56,16 +49,16 @@ void draw() {
     
     float z1 = -1*i;
     float z2 = (-1*i)+1;
-    float x1 = r*sin(PI*6*(i-theta)/400);
-    float x2 = r*sin(PI*6*(i-1-theta)/400);
-    float y1 = r*cos(PI*6*(i-theta)/400);
-    float y2 = r*cos(PI*6*(i-1-theta)/400);
+    float x1 = r*sin(PI*6*(i-f)/400);
+    float x2 = r*sin(PI*6*(i-1-f)/400);
+    float y1 = r*cos(PI*6*(i-f)/400);
+    float y2 = r*cos(PI*6*(i-1-f)/400);
     line(x1,y1,z1,x2,y2,z2);
   }
   
   pushMatrix();
-  float x = r*sin(PI*6*(400-theta)/400);
-  float y = r*cos(PI*6*(400-theta)/400);
+  float x = r*sin(PI*6*(400-f)/400);
+  float y = r*cos(PI*6*(400-f)/400);
   translate(x,y,0);
   fill(#ffffff);
   sphere(10);
@@ -89,18 +82,4 @@ float cubic_ease(float value, float start1, float stop1, float start2, float sto
   if (t < 1) return c/2*t*t*t + b;
   t -= 2;
   return c/2*(t*t*t + 2) + b;
-}
-
-void drawAxes() {
-  // x - red
-  stroke(255,0,0);
-  line(0,0,0,200,0,0);
-  
-  // y - green
-  stroke(0,255,0);
-  line(0,0,0,0,200,0);
-  
-  // z - blue
-  stroke(0,0,255);
-  line(0,0,0,0,0,200);
 }
